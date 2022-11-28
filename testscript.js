@@ -14,7 +14,7 @@ const grid = 10; //Changing this value will affect size of squares of grid.
 
 //rotating obejcts limited to set degrees. commented this out because it limits my manipulation of object at a certain degree
 fabric.Object.prototype.set({
-    snapAngle: 5
+    snapAngle: 15
 });
 
 // Creates a grid based off grid value the size of squares is adjusted.
@@ -42,9 +42,9 @@ canvas.on('object:moving', function (options) {
 let line;
 let isDrawing = false;
 let DrawMode = 0;
-const lineToolButton = document.querySelector(`.outerwall`);
 
-lineToolButton.addEventListener(`click`, function () {
+
+let DrawLine = (stroke,strokeWidth)=> {
 
     canvas.defaultCursor = `crosshair`;
     DrawMode = 1;
@@ -56,9 +56,9 @@ lineToolButton.addEventListener(`click`, function () {
         let points = [pointer.x, pointer.y, pointer.x, pointer.y];
 
         line = new fabric.Line(points, {
-            strokeWidth: 5,
-            stroke: 'black',
-            strokeUniform:true
+            strokeWidth: strokeWidth,
+            stroke:stroke,
+            
         });
         canvas.add(line);
     });
@@ -76,13 +76,25 @@ lineToolButton.addEventListener(`click`, function () {
         if (isDrawing && DrawMode === 1) {
         isDrawing = false;
         line.selectable = false;
-        console.log(line);
+        
         canvas.discardActiveObject()
         
         }
         
     });
-})
+}
+ const outwallButton = document.querySelector(`.outerWall`);
+const innerwallButton = document.querySelector(`.innerWall`);
+
+outwallButton.addEventListener(`click`,()=>{
+    DrawLine("black",5)
+});
+
+innerwallButton.addEventListener(`click`,()=>{
+    DrawLine("black",2)
+});
+
+
 // mouse selector mode function
 const mouseSelectorMode = document.querySelector(".MouseSelectorMode");
 mouseSelectorMode.addEventListener('click', function () {
@@ -91,6 +103,15 @@ mouseSelectorMode.addEventListener('click', function () {
 })
 //--------objects----------//
 // All addable object
+let putOnCanvas =(url)=>{
+    DrawMode = 0;
+    canvas.defaultCursor = `arrow`;
+    fabric.Image.fromURL(url, (img)=>{
+        let imgProperties = img.set({ left: 0, top: 0 });
+        canvas.add(imgProperties);
+    })
+}
+
 let chairButton = document.querySelector(`.chair`);
 chairButton.addEventListener(`click`,()=>{
   putOnCanvas(`./furnitureImages/chair.png`)
@@ -136,14 +157,7 @@ drawersButton.addEventListener(`click`,()=> {
 putOnCanvas(`./furnitureImages/drawers.png`)
 })
 
-let putOnCanvas =(url)=>{
-        DrawMode = 0;
-        canvas.defaultCursor = `arrow`;
-        fabric.Image.fromURL(url, (img)=>{
-            let imgProperties = img.set({ left: 0, top: 0 });
-            canvas.add(imgProperties);
-        })
-}
+
  
 //--------objects end-------//
 
@@ -190,8 +204,7 @@ buttonLeft.addEventListener('click', function () {
     fabricGrouping.top = postRotate.y;
     fabricGrouping.left = postRotate.x;
     fabricGrouping.rotate(fabricGrouping.angle - 10); // rotating object 
-    console.log(canvasHeight);
-console.log(canvasWidth);
+  
     canvas.renderAll();
 });
 
