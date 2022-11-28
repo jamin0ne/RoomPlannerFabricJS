@@ -90,111 +90,61 @@ mouseSelectorMode.addEventListener('click', function () {
     canvas.defaultCursor = `default`;
 })
 //--------objects----------//
-
-//Creates demo object in form of square, would otherwise be a rectangular image of a table, chair etc. 
-
-// let square = new fabric.Rect({
-//     left: 100,
-//     top: 100,
-//     width: 50,
-//     height: 50,
-//     fill: 'red',
-//     originX: 'left',
-//     originY: 'top',
-//     centeredRotation: true,
-// });
-// canvas.add(square);
-
+// All addable object
 let chairButton = document.querySelector(`.chair`);
-chairButton.addEventListener(`click`, function () {
-    DrawMode = 0;
-    canvas.defaultCursor = `arrow`;
-    fabric.Image.fromURL(`./furnitureImages/chair.png`, function (img) {
-        let imgProperties = img.set({ left: 0, top: 0 });
-        canvas.add(imgProperties);
-    })
+chairButton.addEventListener(`click`,()=>{
+  putOnCanvas(`./furnitureImages/chair.png`)
 })
 
 let sofaPieceButton = document.querySelector(`.sofaPiece`);
-sofaPieceButton.addEventListener(`click`, function () {
-    DrawMode = 0;
-    canvas.defaultCursor = `arrow`;
-    fabric.Image.fromURL(`./furnitureImages/armlessUnit.png`, function (img) {
-        let imgProperties = img.set({ left: 0, top: 0 });
-        canvas.add(imgProperties);
-    })
+sofaPieceButton.addEventListener(`click`,()=>{
+   putOnCanvas(`./furnitureImages/armlessUnit.png`)
 })
 
 let cornerButton = document.querySelector(`.corner`);
-cornerButton.addEventListener(`click`, function () {
-    DrawMode = 0;
-    canvas.defaultCursor = `arrow`;
-    fabric.Image.fromURL(`./furnitureImages/corner.png`, function (img) {
-        let imgProperties = img.set({ left: 0, top: 0 });
-        canvas.add(imgProperties);
-    })
+cornerButton.addEventListener(`click`,()=>{
+    putOnCanvas(`./furnitureImages/stool.png`)
 })
 
 let stoolButton = document.querySelector(`.stool`);
-stoolButton.addEventListener(`click`, function () {
-    DrawMode = 0;
-    canvas.defaultCursor = `arrow`;
-    fabric.Image.fromURL(`./furnitureImages/stool.png`, function (img) {
-        let imgProperties = img.set({ left: 0, top: 0 });
-        canvas.add(imgProperties);
-    })
+stoolButton.addEventListener(`click`,()=> {
+  putOnCanvas(`./furnitureImages/stool.png`)
 })
 
 let footStoolButton = document.querySelector(`.footStool`);
-footStoolButton.addEventListener(`click`, function () {
-    DrawMode = 0;
-    canvas.defaultCursor = `arrow`;
-    fabric.Image.fromURL(`./furnitureImages/footStool.png`, function (img) {
-        let imgProperties = img.set({ left: 0, top: 0 });
-        canvas.add(imgProperties);
-    })
+footStoolButton.addEventListener(`click`,()=> {
+ putOnCanvas(`./furnitureImages/footStool.png`)
 })
 
 let tableButton = document.querySelector(`.table`);
-tableButton.addEventListener(`click`, function () {
-    DrawMode = 0;
-    canvas.defaultCursor = `arrow`;
-    fabric.Image.fromURL(`./furnitureImages/table.png`, function (img) {
-        let imgProperties = img.set({ left: 0, top: 0 });
-        canvas.add(imgProperties);
-    })
+tableButton.addEventListener(`click`,()=> {
+putOnCanvas(`./furnitureImages/table.png`)
 })
 
 let wardrobeButton = document.querySelector(`.wardrobe`);
-wardrobeButton.addEventListener(`click`, function () {
-    DrawMode = 0;
-    canvas.defaultCursor = `arrow`;
-    fabric.Image.fromURL(`./furnitureImages/wardrobe.png`, function (img) {
-        let imgProperties = img.set({ left: 0, top: 0 });
-        canvas.add(imgProperties);
-    })
+wardrobeButton.addEventListener(`click`, ()=>{
+putOnCanvas(`./furnitureImages/wardrobe.png`)
 })
 
 let bedButton = document.querySelector(`.bed`);
-bedButton.addEventListener(`click`, function () {
-    DrawMode = 0;
-    canvas.defaultCursor = `arrow`;
-    fabric.Image.fromURL(`./furnitureImages/doubleBed.png`, function (img) {
-        let imgProperties = img.set({ left: 0, top: 0 });
-        canvas.add(imgProperties);
-    })
+bedButton.addEventListener(`click`, ()=> {
+putOnCanvas(`./furnitureImages/doubleBed.png`)
 })
 
 let drawersButton = document.querySelector(`.drawers`);
-drawersButton.addEventListener(`click`, function () {
-    DrawMode = 0;
-    canvas.defaultCursor = `arrow`;
-    fabric.Image.fromURL(`./furnitureImages/drawers.png`, function (img) {
-        let imgProperties = img.set({ left: 0, top: 0 });
-        canvas.add(imgProperties);
-    })
+drawersButton.addEventListener(`click`,()=> {
+putOnCanvas(`./furnitureImages/drawers.png`)
 })
 
+let putOnCanvas =(url)=>{
+        DrawMode = 0;
+        canvas.defaultCursor = `arrow`;
+        fabric.Image.fromURL(url, (img)=>{
+            let imgProperties = img.set({ left: 0, top: 0 });
+            canvas.add(imgProperties);
+        })
+}
+ 
 //--------objects end-------//
 
 //reset button functionality 
@@ -207,7 +157,7 @@ resetButton.addEventListener(`click`, function () {
 
 
 // creating rotation funtions
-var fabricGrouping = new fabric.Group();// created a group
+let fabricGrouping = new fabric.Group();// created a group
 let canvasCenter = new fabric.Point(canvasWidth / 2, canvasHeight / 2); // center of canvas
 let rads = 0.174532925; // 10 degrees in radians
 
